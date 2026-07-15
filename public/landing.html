@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookBook AI — Скачать Умного Помощника на Кухне</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #070a13;
+      --card-bg: rgba(15, 23, 42, 0.45);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --orange: #f97316;
+      --orange-glow: rgba(249, 115, 22, 0.35);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --text-white: #ffffff;
+      --text-gray: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: -0.5px;
+    }
+
+    /* Glow Elements */
+    .glow-bg {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(150px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    .glow-top { top: -200px; left: 10%; background: var(--orange); }
+    .glow-mid { top: 600px; right: 5%; background: var(--purple); }
+    .glow-bottom { bottom: 100px; left: -100px; background: var(--orange); }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Header logo styling */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 40px 0 20px;
+      text-decoration: none;
+    }
+    .logo-box {
+      background: var(--orange);
+      padding: 8px;
+      border-radius: 16px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px var(--orange-glow);
+    }
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      background: linear-gradient(to right, var(--orange), #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Main Content Wrapper */
+    .content-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 36px;
+      padding: 48px;
+      margin: 40px 0 60px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      backdrop-filter: blur(20px);
+    }
+
+    /* Titles */
+    .hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 60%, var(--text-gray));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Structure Sections */
+    .section-block {
+      margin-bottom: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .section-block:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      color: var(--orange);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .section-badge.blue {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+    }
+
+    .section-badge.green {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: var(--text-white);
+    }
+
+    .section-text {
+      color: var(--text-gray);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* Inner bullet cards */
+    .features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 640px) {
+      .features-list { grid-template-columns: 1fr; }
+    }
+    .feature-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 16px;
+      border-radius: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .feature-item i {
+      color: var(--orange);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .feature-item-desc {
+      font-size: 12px;
+      color: var(--text-gray);
+    }
+
+    /* App mockup image center */
+    .mockup-container {
+      margin: 32px 0;
+      text-align: center;
+    }
+    .mockup-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Download CTA block */
+    .download-cta {
+      text-align: center;
+      padding: 30px 20px 10px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.01), rgba(249, 115, 22, 0.03));
+      border-radius: 24px;
+      border: 1px dashed rgba(249, 115, 22, 0.2);
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, var(--orange) 0%, #ea580c 100%);
+      color: white;
+      padding: 18px 48px;
+      border-radius: 24px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 30px var(--orange-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    .btn-download:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 35px rgba(249, 115, 22, 0.5);
+    }
+    .file-info {
+      font-size: 12px;
+      color: var(--text-gray);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #475569;
+      font-size: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background decorative light balls -->
+  <div class="glow-bg glow-top"></div>
+  <div class="glow-bg glow-mid"></div>
+  <div class="glow-bg glow-bottom"></div>
+
+  <!-- Header -->
+  <div class="container">
+    <a href="#" class="header-logo">
+      <div class="logo-box">
+        <i data-lucide="chef-hat" style="width: 28px; height: 28px;"></i>
+      </div>
+      <span class="logo-text">CookBook AI</span>
+    </a>
+  </div>
+
+  <!-- Main Section container -->
+  <div class="container">
+    
+    <div class="content-box">
+      <h1 class="hero-title">Скачайте Официальное Приложение</h1>
+
+      <!-- SECTION 1: ПРО ЧТО САЙТ -->
+      <div class="section-block">
+        <div class="section-badge">
+          <i data-lucide="info" style="width: 12px; height: 12px;"></i>
+          <span>О проекте</span>
+        </div>
+        <h2 class="section-title">Про что этот сайт?</h2>
+        <p class="section-text">
+          Этот ресурс посвящен инновационной кулинарной библиотеке <strong>CookBook AI</strong>. Мы разработали интерактивную цифровую книгу рецептов, объединяющую классическую кулинарию с современными технологиями генеративного искусственного интеллекта.
+        </p>
+        <p class="section-text">
+          Сайт является официальным порталом проекта, где собраны лучшие кулинарные идеи, автоматический расчет БЖУ и умный чат-бот на базе LLM. Здесь пользователи могут ознакомиться с концепцией приложения и загрузить полноценную десктопную версию на свой компьютер.
+        </p>
+        
+        <div class="mockup-container">
+          <img src="/cookbook_app_mockup.png" alt="CookBook AI Интерфейс приложения" class="mockup-img" />
+        </div>
+      </div>
+
+      <!-- SECTION 2: ДЛЯ ЧЕГО САЙТ -->
+      <div class="section-block">
+        <div class="section-badge blue">
+          <i data-lucide="compass" style="width: 12px; height: 12px;"></i>
+          <span>Возможности</span>
+        </div>
+        <h2 class="section-title">Для чего нужен этот сайт?</h2>
+        <p class="section-text">
+          Сайт создан для предоставления доступа к полному функционалу экосистемы <strong>CookBook AI</strong>. Приложение заменяет десятки разрозненных калькуляторов калорий, блокнотов с рецептами и списков покупок, объединяя их в одном премиальном решении.
+        </p>
+        
+        <div class="features-list">
+          <div class="feature-item">
+            <i data-lucide="camera"></i>
+            <div>
+              <div class="feature-item-title">Сканирование холодильника</div>
+              <div class="feature-item-desc">ИИ распознает ингредиенты по одной фотографии и сразу подберёт рецепты.</div>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <i data-lucide="wand-2"></i>
+            <div>
+              <div class="feature-item-title">AI генератор блюд</div>
+              <div class="feature-item-desc">Создание новых уникальных рецептов по списку имеющихся продуктов.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <i data-lucide="calendar"></i>
+            <div>
+              <div class="feature-item-title">План питания на неделю</div>
+              <div class="feature-item-desc">Составление расписания завтраков, обедов и ужинов с автоматическим суммированием КБЖУ.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <i data-lucide="flame"></i>
+            <div>
+              <div class="feature-item-title">Дневник калорийности</div>
+              <div class="feature-item-desc">Учет съеденных блюд за день с красивыми графиками прогресса.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: ЗАЧЕМ САЙТ -->
+      <div class="section-block">
+        <div class="section-badge green">
+          <i data-lucide="sparkles" style="width: 12px; height: 12px;"></i>
+          <span>Польза</span>
+        </div>
+        <h2 class="section-title">Зачем вам CookBook AI?</h2>
+        <p class="section-text">
+          Основная цель <strong>CookBook AI</strong> — избавить вас от ежедневной рутины и вопроса «Что сегодня приготовить?». Приложение помогает экономить бюджет, минимизируя выброс неиспользованных продуктов за счет точного планирования.
+        </p>
+        <p class="section-text">
+          Кулинария должна приносить удовольствие! Поэтому мы добавили элементы геймификации: повышайте свой уровень за счет ежедневного приготовления блюд, удерживайте серию кулинарных дней и открывайте забавные награды.
+        </p>
+      </div>
+
+      <!-- SECTION 4: КНОПКА СКАЧИВАНИЯ -->
+      <div class="section-block" style="border: none;">
+        <div class="download-cta">
+          <a href="https://github.com/kirillrz298-commits/CookAI/releases/latest/download/CookBook-AI-Setup.exe" download="CookBook-AI-Setup.exe" class="btn-download">
+            <i data-lucide="download-cloud"></i>
+            Скачать CookBook AI бесплатно
+          </a>
+          <div class="file-info" style="margin-bottom: 12px;">
+            <i data-lucide="monitor" style="display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 4px;"></i>
+            Версия для Windows (.exe) &nbsp;·&nbsp; 64-bit &nbsp;·&nbsp; Размер: ~107 МБ
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 20px; text-align: left; margin-top: 12px;">
+            <div style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">📋 Инструкция по установке:</div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1;">
+                <span style="background: #f97316; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;">1</span>
+                Нажмите кнопку «Скачать» выше и дождитесь загрузки файла
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1;">
+                <span style="background: #f97316; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;">2</span>
+                Откройте скачанный файл <strong>CookBook-AI-Setup.exe</strong>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1;">
+                <span style="background: #f97316; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;">3</span>
+                Если Windows SmartScreen предупреждает — нажмите <strong>«Подробнее» → «Выполнить в любом случае»</strong>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1;">
+                <span style="background: #f97316; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;">4</span>
+                Следуйте мастеру установки и нажмите <strong>«Установить»</strong>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1;">
+                <span style="background: #22c55e; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0;">✓</span>
+                Готово! Ярлык <strong>CookBook AI Library</strong> появится на рабочем столе
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 CookBook AI. Создано с любовью для поваров любого уровня.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
