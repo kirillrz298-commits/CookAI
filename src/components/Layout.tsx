@@ -1,8 +1,8 @@
 import React from 'react';
-import { ChefHat, Heart, Moon, Sun, Compass, Shield, PlusCircle, LogOut, Calendar, Flame, Trophy, ShoppingCart, BookOpen } from 'lucide-react';
+import { ChefHat, Heart, Moon, Sun, Compass, Shield, PlusCircle, LogOut, Calendar, Flame, Trophy, ShoppingCart } from 'lucide-react';
 import type { UserProfile, UserSession } from '../types';
 
-type PageType = 'home' | 'search' | 'recipe' | 'profile' | 'create-recipe' | 'admin' | 'meal-planner' | 'calories' | 'achievements' | 'shopping' | 'manual';
+type PageType = 'home' | 'search' | 'recipe' | 'profile' | 'create-recipe' | 'admin' | 'meal-planner' | 'calories' | 'achievements' | 'shopping';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -74,7 +74,6 @@ export const Layout: React.FC<LayoutProps> = ({
             {navItem('achievements', 'Достижения', <Trophy className="w-4 h-4" />)}
             {navItem('create-recipe', 'Свой рецепт', <PlusCircle className="w-4 h-4" />)}
             {navItem('profile', `Избранное (${profile.favorites.length})`, <Heart className="w-4 h-4 text-brand-orange fill-brand-orange/10" />)}
-            {navItem('manual', 'Учебный центр', <BookOpen className="w-4 h-4" />)}
             {isAdmin && navItem('admin', 'Админка', <Shield className="w-4 h-4" />)}
           </nav>
 
@@ -181,7 +180,6 @@ export const Layout: React.FC<LayoutProps> = ({
             <button onClick={() => onNavigate('meal-planner')} className="hover:text-brand-orange transition-colors cursor-pointer">Планировщик</button>
             <button onClick={() => onNavigate('achievements')} className="hover:text-brand-orange transition-colors cursor-pointer">Достижения</button>
             <button onClick={() => onNavigate('profile')} className="hover:text-brand-orange transition-colors cursor-pointer">Профиль</button>
-            <button onClick={() => onNavigate('manual')} className="hover:text-brand-orange transition-colors cursor-pointer">Учебный центр</button>
             {isAdmin && <button onClick={() => onNavigate('admin')} className="hover:text-brand-orange transition-colors cursor-pointer">Админка</button>}
           </div>
         </div>

@@ -15,7 +15,6 @@ import { ShoppingListPanel } from './components/ShoppingList';
 import { MealPlanner } from './components/MealPlanner';
 import { CalorieDashboard } from './components/CalorieDashboard';
 import { AchievementsPanel } from './components/Achievements';
-import { MethodicalManual } from './components/MethodicalManual';
 import { RECIPES } from './data/recipes';
 import type { Recipe, UserProfile as UserProfileType, UserSession, ShoppingListItem, MealPlan, DayKey, CalorieLogEntry, DailyCalories, UserStreak, Badge } from './types';
 import { 
@@ -53,7 +52,7 @@ const CATEGORIES_DATA = [
 export default function App() {
   // Authentication & Navigation
   const [user, setUser] = useState<UserSession | null>(apiGetCurrentUser());
-  const [activePage, setActivePage] = useState<'home' | 'search' | 'recipe' | 'profile' | 'create-recipe' | 'admin' | 'meal-planner' | 'calories' | 'achievements' | 'shopping' | 'manual'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'search' | 'recipe' | 'profile' | 'create-recipe' | 'admin' | 'meal-planner' | 'calories' | 'achievements' | 'shopping'>('home');
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
@@ -926,10 +925,6 @@ export default function App() {
         />
       )}
 
-      {/* 11. METHODICAL MANUAL VIEW */}
-      {activePage === 'manual' && (
-        <MethodicalManual />
-      )}
 
       {/* AI Chef Assistant Floating Chat */}
       <AIChad onOpenRecipe={handleOpenRecipeById} />
