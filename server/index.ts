@@ -23,6 +23,17 @@ app.get('/', (req: Request, res: Response) => {
   return res.sendFile(PROD_PAGE);
 });
 
+// Download route — redirects to GitHub Releases asset
+app.get('/download', (req: Request, res: Response) => {
+  const GITHUB_RELEASE_URL = 'https://github.com/kirillrz298-commits/CookAI/releases/latest/download/CookBook-AI-Setup.exe';
+  res.redirect(302, GITHUB_RELEASE_URL);
+});
+
+app.get('/download/app', (req: Request, res: Response) => {
+  const GITHUB_RELEASE_URL = 'https://github.com/kirillrz298-commits/CookAI/releases/latest/download/CookBook-AI-Setup.exe';
+  res.redirect(302, GITHUB_RELEASE_URL);
+});
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   if (req.method === 'GET' && !req.path.startsWith('/api')) {
     if (isDev) {
